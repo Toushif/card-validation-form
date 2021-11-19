@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Validation</title>
+    <link rel="stylesheet" href="src/index.css">
+    <script defer src="src/index.js"></script>
+</head>
+<body>
+    <div class="wrapper" id="card-validation">
+        <div class="inner-wrapper">
+            <div class="card">
+                <div class="lower-half">
+                    <div class="card-number">**** **** **** ****</div>
+                    <div class="card-name">TOUSHIF UL HAQUE</div>
+                    <div class="lower-wrapper">
+                        <div class="valid-thru">01/25</div>
+                        <div class="cvv">***</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-wrapper-outer">
+                <form class="form-wrapper" name="cardValdation" onsubmit="return submitForm(event);">
+                    <input class="card-number" placeholder="Card Number" type="number" name="cardNumber" id="card-number" maxlength="16" minlength="16">
+                    <!-- <label for="ccn">Credit Card Number:</label> -->
+                    <!-- <input class="card-number" name="cardNumber" id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="16" minlength="16" placeholder="xxxx xxxx xxxx xxxx"> -->
+                    <input class="card-name" placeholder="Card Name" type="text" name="cardName" id="cardName" minlength="8">
+                    <div class="input-wrapper">
+                        <input class="valid-thru" placeholder="Valid Thru" type="number" name="validThru" id="valid-thru" maxlength="4" minlength="4">
+                        <input class="card-cvv" placeholder="CVV" type="password" name="cardCvv" id="card-cvv" maxlength="3" minlength="3">
+                    </div>
+                    <input name="submitBtn" type="submit" value="PAY" class="submit-btn">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

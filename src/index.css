@@ -1,0 +1,80 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+}
+
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner-wrapper {
+    width: 22rem;
+    height: 35rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    height: 16rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: flex-end;
+    background: #ddd;
+}
+
+.lower-half, .form-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.lower-wrapper, .input-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.lower-half {
+    padding: 1rem;
+}
+
+.lower-wrapper .valid-thru, .lower-wrapper .cvv, .input-wrapper .valid-thru, .input-wrapper .card-cvv {
+    /* flex-grow: 1; */
+    /* flex-basis: 0; */
+    margin-top: 1rem;
+    width: 8rem;
+}
+
+.form-wrapper-outer {
+    height: 35rem;
+}
+
+.submit-btn {
+    margin-top: 1rem;
+    background-color: darkcyan;
+    cursor: pointer;
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #000;
+    color: #fff;
+    height: 1.5rem;
+}
+.submit-btn:disabled {
+    cursor: not-allowed;
+    color: #000;
+    background-color: #eee;
+}
+
+.card-number {
+    margin-top: 2rem;
+}
+.card-name {
+    margin-top: 1rem;
+}
