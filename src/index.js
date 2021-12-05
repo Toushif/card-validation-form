@@ -35,18 +35,14 @@ formCardValidation.onsubmit = async (e) => {
 function handleValidation(e) {
     const name = e.target.name;
     const value = e.target.value;
-    name === "cardNumber"
-        ? (isCardNumber = name === "cardNumber" && value.length === 16)
-        : "";
-    name === "cardName"
-        ? (isCardName = name === "cardName" && value.length >= 8)
-        : "";
-    name === "validThru"
-        ? (isValidThru = name === "validThru" && value.length === 4)
-        : "";
-    name === "cardCvv"
-        ? (isCardCvv = name === "cardCvv" && value.length === 3)
-        : "";
+    if((name === "validThru" || name === "cardNumber") && ((e.keyCode < 48 || e.keyCode > 57) && e.keyCode !== 8)) {
+        e.preventDefault()
+        return;
+    }
+    name === "cardNumber" ? (isCardNumber = value.length === 16) : "";
+    name === "cardName" ? (isCardName = value.length >= 8) : "";
+    name === "validThru" ? (isValidThru = value.length === 4) : "";
+    name === "cardCvv" ? (isCardCvv = value.length === 3) : "";
 
     if (isCardNumber && isCardName && isValidThru && isCardCvv) {
         submitBtn.removeAttribute("disabled");
@@ -55,6 +51,7 @@ function handleValidation(e) {
             submitBtn.setAttribute("disabled", true);
     }
     // console.log(
+    //     e,
     //     e.target.name,
     //     isCardNumber,
     //     isCardName,
@@ -65,15 +62,33 @@ function handleValidation(e) {
 
 function handleCardNumberInput(e) {
     const value = e.target.value;
-    if (value.length && value.length > 4) {
-        tempValidThru = [];
-        for (let i = 0; i < value.length; i += 4) {
-            tempValidThru.push(value.substr(i, 4));
+    if(((e.keyCode < 48 || e.keyCode > 57) && e.keyCode !== 8) || (tempValidThru.join('').length === 16 && e.keyCode !== 8)) {
+        return;
+    }
+    // if (value.length && value.length > 4) {
+    //     tempValidThru = [];
+    //     for (let i = 0; i < value.length; i += 4) {
+    //         tempValidThru.push(value.substr(i, 4));
+    //     }
+    // }
+    if(e.keyCode === 8 && tempValidThru.length) {
+        let text = tempValidThru[tempValidThru.length - 1];
+        tempValidThru[tempValidThru.length - 1] = text.substr(0, text.length-1)
+        if(!text) tempValidThru.pop()
+    } else {
+        if(tempValidThru.length) {
+            if(tempValidThru[tempValidThru.length - 1].length < 4) {
+                tempValidThru[tempValidThru.length - 1] += value[value.length - 1]
+            } else {
+                tempValidThru[tempValidThru.length] = value[value.length - 1]
+            }
+        } else {
+            tempValidThru[0] = value;
         }
     }
     const store = tempValidThru.join("-");
     cardNum.setAttribute("defaultValue", store); //formatting not working
-    // console.log("temp", e, tempValidThru, store, cardNum.value);
+    console.log("temp", tempValidThru, store, cardNum.value);
 }
 
 function init() {
